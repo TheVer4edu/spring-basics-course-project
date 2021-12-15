@@ -14,7 +14,7 @@ import com.yet.spring.core.beans.Event;
 
 public class DBLogger extends AbstractLogger {
 
-    private static final String SQL_ERROR_STATE_SCHEMA_EXISTS = "X0Y68";
+    private static final String SQL_ERROR_STATE_SCHEMA_EXISTS = "HY000";
     private static final String SQL_ERROR_STATE_TABLE_EXISTS = "X0Y32";
 
     private JdbcTemplate jdbcTemplate;
@@ -22,7 +22,8 @@ public class DBLogger extends AbstractLogger {
 
     public DBLogger(JdbcTemplate jdbcTemplate, String schema) {
         this.jdbcTemplate = jdbcTemplate;
-        this.schema = schema.toUpperCase();
+//        this.schema = schema.toUpperCase();
+        this.schema = schema;
     }
 
     public void init() {
@@ -45,7 +46,7 @@ public class DBLogger extends AbstractLogger {
 
     private void createDBSchema() {
         try {
-            jdbcTemplate.update("CREATE SCHEMA " + schema);
+            jdbcTemplate.update("CREATE SCHEMA `" + schema + "`");
         } catch (DataAccessException e) {
             Throwable causeException = e.getCause();
             if (causeException instanceof SQLException) {

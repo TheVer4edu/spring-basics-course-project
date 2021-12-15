@@ -29,7 +29,7 @@ public class FileEventLogger extends AbstractLogger {
 	@Override
 	public void logEvent(Event event) {
 		try {
-			FileUtils.writeStringToFile(file, event.toString() + "\n", true);
+			FileUtils.writeStringToFile(file, event.toString() + "\n", false);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
